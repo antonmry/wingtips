@@ -16,7 +16,7 @@ package com.nike.wingtips.zipkin.elasticapm;
 import java.util.List;
 
 import com.nike.wingtips.zipkin.elasticapm.internal.JsonCodec;
-import zipkin.internal.ThriftCodec;
+import com.nike.wingtips.zipkin.elasticapm.internal.ThriftCodec;
 
 /**
  * Methods make an attempt to perform codec operations, failing to null.

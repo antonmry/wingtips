@@ -24,9 +24,9 @@ import java.util.List;
 import com.nike.wingtips.zipkin.elasticapm.Annotation;
 import com.nike.wingtips.zipkin.elasticapm.BinaryAnnotation;
 import com.nike.wingtips.zipkin.elasticapm.Codec;
-import zipkin.DependencyLink;
-import zipkin.Endpoint;
-import zipkin.Span;
+import com.nike.wingtips.zipkin.elasticapm.DependencyLink;
+import com.nike.wingtips.zipkin.elasticapm.Endpoint;
+import com.nike.wingtips.zipkin.elasticapm.Span;
 
 import static com.nike.wingtips.zipkin.elasticapm.internal.Util.UTF_8;
 import static com.nike.wingtips.zipkin.elasticapm.internal.Util.assertionError;

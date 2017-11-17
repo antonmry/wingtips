@@ -1,5 +1,6 @@
 package com.nike.wingtips.zipkin.util;
 
+import com.nike.wingtips.zipkin.elasticapm.Span;
 import java.io.Flushable;
 
 /**
@@ -28,7 +29,7 @@ public interface ZipkinSpanSender extends Flushable {
      *
      * @param span The Zipkin span to handle.
      */
-    void handleSpan(zipkin.Span span);
+    void handleSpan(Span span);
 
     /**
      * <p>

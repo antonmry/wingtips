@@ -13,7 +13,7 @@ import org.slf4j.LoggerFactory;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicLong;
 
-import zipkin.Endpoint;
+import com.nike.wingtips.zipkin.elasticapm.Endpoint;
 
 /**
  * <p>
@@ -107,7 +107,7 @@ public class WingtipsToZipkinLifecycleListener implements SpanLifecycleListener 
     @Override
     public void spanCompleted(Span span) {
         try {
-            zipkin.Span zipkinSpan = zipkinSpanConverter.convertWingtipsSpanToZipkinSpan(span, zipkinEndpoint, localComponentNamespace);
+            com.nike.wingtips.zipkin.elasticapm.Span zipkinSpan = zipkinSpanConverter.convertWingtipsSpanToZipkinSpan(span, zipkinEndpoint, localComponentNamespace);
             zipkinSpanSender.handleSpan(zipkinSpan);
         }
         catch(Throwable ex) {

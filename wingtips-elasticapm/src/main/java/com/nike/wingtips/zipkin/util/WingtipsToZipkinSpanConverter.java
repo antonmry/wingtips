@@ -2,7 +2,7 @@ package com.nike.wingtips.zipkin.util;
 
 import com.nike.wingtips.Span;
 
-import zipkin.Endpoint;
+import com.nike.wingtips.zipkin.elasticapm.Endpoint;
 
 /**
  * Simple interface for a class that knows how to convert a Wingtips {@link Span} to a {@link zipkin.Span}.
@@ -22,6 +22,6 @@ public interface WingtipsToZipkinSpanConverter {
      *                                what value you should send.
      * @return The given Wingtips {@link Span} after it has been converted to a {@link zipkin.Span}.
      */
-    zipkin.Span convertWingtipsSpanToZipkinSpan(Span wingtipsSpan, Endpoint zipkinEndpoint, String localComponentNamespace);
+    com.nike.wingtips.zipkin.elasticapm.Span convertWingtipsSpanToZipkinSpan(Span wingtipsSpan, Endpoint zipkinEndpoint, String localComponentNamespace);
 
 }

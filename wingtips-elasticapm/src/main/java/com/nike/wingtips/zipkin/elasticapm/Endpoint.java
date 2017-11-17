@@ -28,8 +28,8 @@ import static com.nike.wingtips.zipkin.elasticapm.internal.Util.checkNotNull;
 /**
  * Indicates the network context of a service recording an annotation with two exceptions.
  *
- * <p>When a BinaryAnnotation, and key is {@link Constants#CLIENT_ADDR} or {@link
- * Constants#SERVER_ADDR}, the endpoint indicates the source or destination of an RPC. This
+ * <p>When a BinaryAnnotation, and key is {@link } or {@link
+ * }, the endpoint indicates the source or destination of an RPC. This
  * exception allows zipkin to display network context of uninstrumented services, or clients such as
  * web browsers.
  */
@@ -39,12 +39,12 @@ public final class Endpoint {
      * @deprecated as leads to null pointer exceptions on port. Use {@link #builder()} instead.
      */
     @Deprecated
-    public static zipkin.Endpoint create(String serviceName, int ipv4, int port) {
-        return new zipkin.Endpoint(serviceName, ipv4, null, port == 0 ? null : (short) (port & 0xffff));
+    public static Endpoint create(String serviceName, int ipv4, int port) {
+        return new Endpoint(serviceName, ipv4, null, port == 0 ? null : (short) (port & 0xffff));
     }
 
-    public static zipkin.Endpoint create(String serviceName, int ipv4) {
-        return new zipkin.Endpoint(serviceName, ipv4, null, null);
+    public static Endpoint create(String serviceName, int ipv4) {
+        return new Endpoint(serviceName, ipv4, null, null);
     }
 
     /**
@@ -104,12 +104,12 @@ public final class Endpoint {
         this.port = port;
     }
 
-    public zipkin.Endpoint.Builder toBuilder(){
-        return new zipkin.Endpoint.Builder(this);
+    public Endpoint.Builder toBuilder(){
+        return new Endpoint.Builder(this);
     }
 
-    public static zipkin.Endpoint.Builder builder(){
-        return new zipkin.Endpoint.Builder();
+    public static Endpoint.Builder builder(){
+        return new Endpoint.Builder();
     }
 
     public static final class Builder {
@@ -121,27 +121,27 @@ public final class Endpoint {
         Builder() {
         }
 
-        Builder(zipkin.Endpoint source) {
+        Builder(Endpoint source) {
             this.serviceName = source.serviceName;
             this.ipv4 = source.ipv4;
             this.ipv6 = source.ipv6;
             this.port = source.port;
         }
 
-        /** @see zipkin.Endpoint#serviceName */
-        public zipkin.Endpoint.Builder serviceName(String serviceName) {
+        /** @see Endpoint#serviceName */
+        public Endpoint.Builder serviceName(String serviceName) {
             this.serviceName = serviceName;
             return this;
         }
 
-        /** @see zipkin.Endpoint#ipv4 */
-        public zipkin.Endpoint.Builder ipv4(int ipv4) {
+        /** @see Endpoint#ipv4 */
+        public Endpoint.Builder ipv4(int ipv4) {
             this.ipv4 = ipv4;
             return this;
         }
 
-        /** @see zipkin.Endpoint#ipv6 */
-        public zipkin.Endpoint.Builder ipv6(byte[] ipv6) {
+        /** @see Endpoint#ipv6 */
+        public Endpoint.Builder ipv6(byte[] ipv6) {
             if (ipv6 != null) {
                 checkArgument(ipv6.length == 16, "ipv6 addresses are 16 bytes: " + ipv6.length);
                 this.ipv6 = ipv6;
@@ -152,28 +152,28 @@ public final class Endpoint {
         /**
          * Use this to set the port to an externally defined value.
          *
-         * <p>Don't pass {@link zipkin.Endpoint#port} to this method, as it may result in a
-         * NullPointerException. Instead, use {@link zipkin.Endpoint#toBuilder()} or {@link #port(Short)}.
+         * <p>Don't pass {@link Endpoint#port} to this method, as it may result in a
+         * NullPointerException. Instead, use {@link Endpoint#toBuilder()} or {@link #port(Short)}.
          *
          * @param port port associated with the endpoint. zero coerces to null (unknown)
-         * @see zipkin.Endpoint#port
+         * @see Endpoint#port
          */
-        public zipkin.Endpoint.Builder port(int port) {
+        public Endpoint.Builder port(int port) {
             checkArgument(port >= 0 && port <= 0xffff, "invalid port %s", port);
             this.port = port == 0 ? null : (short) (port & 0xffff);
             return this;
         }
 
-        /** @see zipkin.Endpoint#port */
-        public zipkin.Endpoint.Builder port(Short port) {
+        /** @see Endpoint#port */
+        public Endpoint.Builder port(Short port) {
             if (port == null || port != 0) {
                 this.port = port;
             }
             return this;
         }
 
-        public zipkin.Endpoint build() {
-            return new zipkin.Endpoint(serviceName, ipv4 == null ? 0 : ipv4, ipv6, port);
+        public Endpoint build() {
+            return new Endpoint(serviceName, ipv4 == null ? 0 : ipv4, ipv6, port);
         }
     }
 
@@ -182,8 +182,8 @@ public final class Endpoint {
         if (o == this) {
             return true;
         }
-        if (o instanceof zipkin.Endpoint) {
-            zipkin.Endpoint that = (zipkin.Endpoint) o;
+        if (o instanceof Endpoint) {
+            Endpoint that = (Endpoint) o;
             return (this.serviceName.equals(that.serviceName))
                     && (this.ipv4 == that.ipv4)
                     && (Arrays.equals(this.ipv6, that.ipv6))
