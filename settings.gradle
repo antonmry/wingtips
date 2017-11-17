@@ -4,6 +4,7 @@ rootProject.name = 'wingtips'
 include "wingtips-core",
         "wingtips-servlet-api",
         "wingtips-zipkin",
+        "wingtips-elasticapm",
         "wingtips-java8",
         "wingtips-spring",
         "wingtips-spring-boot",
